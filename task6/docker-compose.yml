@@ -4,6 +4,8 @@ services:
       context: ./back-end
       dockerfile: Dockerfile
     image: backend
+    networks:
+      - Happy
     deploy:
       replicas: 2
       
@@ -12,8 +14,8 @@ services:
       context: ./front-end
       dockerfile: Dockerfile
     image: frontend
-    ports:
-      - "9000:9000"
+    networks:
+      - Happy
     depends_on:
       - back-end
 
@@ -27,3 +29,9 @@ services:
     depends_on:
       - back-end
       - front-end
+    networks:
+      - Happy
+
+networks:
+  Happy:
+    driver: bridge
